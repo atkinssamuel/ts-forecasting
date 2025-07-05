@@ -1,0 +1,32 @@
+{
+    "name": "ts-forecasting",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "remoteUser": "root",
+    "runArgs": [
+        "--volume",
+        "${localEnv:HOME}${localEnv:SSH_AUTH_SOCK}:/tmp/ssh-auth.sock",
+        "--env",
+        "SSH_AUTH_SOCK=/tmp/ssh-auth.sock",
+        "--network=host"
+    ],
+    "mounts": [
+        "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind", // for SSH keys
+        "source=/var/run/postgresql,target=/var/run/postgresql,type=bind", // for PostgreSQL socket
+        "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind", // for GitHub config
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" // for Docker
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.copilot",
+                "ms-python.python",
+                "ms-python.black-formatter",
+                "njpwerner.autodocstring",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.tensorboard"
+            ]
+        }
+    }
+}

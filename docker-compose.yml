@@ -1,0 +1,15 @@
+services:
+  # locally: psql postgres://uname:pword@localhost:5434/default
+  # docker: psql postgres://uname:pword@ts-db:5432/default
+  ts-db:
+    image: postgres:latest
+    container_name: ts-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: uname
+      POSTGRES_PASSWORD: pword
+      POSTGRES_DB: default
+    volumes:
+      - ~/projects/data/ts-db/postgresql:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
