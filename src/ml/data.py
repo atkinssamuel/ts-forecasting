@@ -62,6 +62,7 @@ def generate_features(
     """
     r = df.copy()
     pv = r.pivot(index=index_col, columns=pivot_col, values=value_col)
+    pv.sort_index(inplace=True)
 
     fcns = [
         lambda x: x.mean(),
